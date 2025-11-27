@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Tourist Planner — Final</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body, html { height:100%; margin:0; font-family: Arial, Helvetica, sans-serif; }
+    #map { height:100%; width: calc(100% - 460px); position: absolute; right:0; top:0; }
+    #sidebar { position:absolute; left:0; top:0; bottom:0; width:460px; padding:12px; overflow:auto;
+               box-shadow: 2px 0 6px rgba(0,0,0,0.15); background:#fff; }
+    .list-item { padding:6px; border-bottom:1px solid #eee; }
+    button { padding:8px 10px; margin-top:6px; cursor:pointer; }
+    input[type=text], select { width:100%; padding:8px; box-sizing:border-box; margin-bottom:6px; }
+    .day-box { border:1px dashed #ccc; padding:8px; margin-bottom:6px; }
+    .small { font-size:0.9em; color:#444; }
+    .place-photo { width:100%; border-radius:6px; margin-top:6px; }
+  </style>
+
+  <!-- Load app.js first (it defines window.initMap), then Maps with callback=initMap -->
+  <script src="app.js"></script>
+
+  <!-- Maps JS: replace key if needed; uses callback=initMap to ensure initMap is available -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI7TmQ8eRjelU2YdLkFEAZjdaok3P1vvI&libraries=places,geometry&callback=initMap">
+  </script>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Tourist Planner — Final</h2>
+
+    <p><b>Search place (city/area):</b></p>
+    <input id="placeInput" placeholder="e.g., Hampi, India" />
+    <button id="searchPlace">Search Place</button>
+    <div id="placeResults"></div>
+
+    <hr/>
+    <p><b>Category filter:</b></p>
+    <select id="categorySelect">
+      <option value="">All (tourist_attraction)</option>
+      <option value="museum">Museums</option>
+      <option value="park">Parks</option>
+      <option value="art_gallery">Galleries</option>
+      <option value="place_of_worship">Place of worship</option>
+      <option value="natural_feature">Natural features</option>
+      <option value="point_of_interest">Point of interest</option>
+    </select>
+    <button id="fetchCategory">Fetch by Category</button>
+
+    <hr/>
+    <h3>Attractions</h3>
+    <div id="attractions"></div>
+    <p><b>Add custom place:</b></p>
+    <input id="customPlace" placeholder="Type and select place (autocomplete)"/>
+    <button id="addCustomPlace">Add to Trip</button>
+
+    <hr/>
+    <h3>Hotels</h3>
+    <button id="findHotelsOnMap">Find Hotels Near This Location</button>
+    <div class="small">If you don't click the map, we use map center automatically.</div>
+    <div id="hotels"></div>
+
+    <hr/>
+    <h3>Trip Planner</h3>
+    Days: <input id="days" value="2" style="width:60px"/>
+    Max hrs/day: <input id="maxHours" value="8" style="width:60px"/>
+    Mode:
+    <select id="mode">
+      <option value="driving">Driving</option>
+      <option value="walking">Walking</option>
+      <option value="transit">Transit</option>
+    </select>
+    <button id="planTrip">Plan Trip</button>
+
+    <hr/>
+    <div id="planResult"></div>
+  </div>
+
+  <div id="map"></div>
+</body>
+</html>
